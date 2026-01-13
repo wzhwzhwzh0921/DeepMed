@@ -262,14 +262,14 @@ class JinaReader:
             }
 
 
-class DoubaoSummarizer:
+class Summarizer:
     """API Summarizer"""
 
     # Token threshold: below this value keep original text
     TOKEN_THRESHOLD = 10000
 
     def __init__(self, api_key: str = None, model: str = None):
-        self.api_key = api_key or os.getenv("ARK_API_KEY", "add-your-api-key-here")
+        self.api_key = api_key or os.getenv("OPENAI_API_KEY", "add-your-api-key-here")
         self.model = model or "gpt-4o"
         self.base_url = "add-your-api-base-here"
         self.headers = {
@@ -285,9 +285,9 @@ class DoubaoSummarizer:
                 "add-your-tokenizer-path-here",
                 trust_remote_code=True
             )
-            print(f"DoubaoSummarizer: Tokenizer loaded successfully")
+            print(f"Summarizer: Tokenizer loaded successfully")
         except Exception as e:
-            print(f"DoubaoSummarizer: Tokenizer loading failed, will use character estimation: {e}")
+            print(f"Summarizer: Tokenizer loading failed, will use character estimation: {e}")
 
     def count_tokens(self, text: str) -> int:
         """Calculate token count of text"""
@@ -421,12 +421,12 @@ class KeywordSearchAgent:
     """Keyword search and description generation Agent"""
 
     def __init__(self, serper_api_key: str = None, jina_api_key: str = None,
-                 doubao_api_key: str = None, doubao_model: str = None,
+                 summarizer_api_key: str = None, summarizer_model: str = None,
                  num_pages: int = 5, entity_cache: EntityCache = None,
                  url_cache: URLCache = None):
         self.searcher = SerperClient(api_key=serper_api_key)
         self.reader = JinaReader(api_key=jina_api_key, url_cache=url_cache)
-        self.summarizer = DoubaoSummarizer(api_key=doubao_api_key, model=doubao_model)
+        self.summarizer = Summarizer(api_key=summarizer_api_key, model=summarizer_model)
         self.num_pages = num_pages
         self.entity_cache = entity_cache
         self.url_cache = url_cache
@@ -618,8 +618,8 @@ def main():
     # API configuration
     SERPER_API_KEY = "add-your-serper-api-key-here"
     JINA_API_KEY = "add-your-jina-api-key-here"
-    DOUBAO_API_KEY = "add-your-api-key-here"
-    DOUBAO_MODEL = "gpt-4o"
+    SUMMARIZER_API_KEY = "add-your-api-key-here"
+    SUMMARIZER_MODEL = "gpt-4o"
 
     NUM_PAGES = 5  # Number of webpages to visit for each keyword search
     MAX_WORKERS = 32  # Concurrent processing count (recommend not too high to avoid API rate limiting)
@@ -650,8 +650,8 @@ def main():
     agent = KeywordSearchAgent(
         serper_api_key=SERPER_API_KEY,
         jina_api_key=JINA_API_KEY,
-        doubao_api_key=DOUBAO_API_KEY,
-        doubao_model=DOUBAO_MODEL,
+        summarizer_api_key=SUMMARIZER_API_KEY,
+        summarizer_model=SUMMARIZER_MODEL,
         num_pages=NUM_PAGES,
         entity_cache=entity_cache,
         url_cache=url_cache
