@@ -1,4 +1,4 @@
-# DeepMed Building a Medical DeepResearch Agent via Multi-hop Med-Search Data and Turn-Controlled Agentic Training & Inference
+# DeepMed: Building a Medical DeepResearch Agent via Multi-hop Med-Search Data and Turn-Controlled Agentic Training & Inference
 ---
 
 ### Figure 1 — General vs Medical Search + DeepMed Gains
