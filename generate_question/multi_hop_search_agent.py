@@ -23,7 +23,7 @@ from tqdm import tqdm
 
 # Reuse existing classes
 from keyword_search_agent import (
-    EntityCache, URLCache, SerperClient, JinaReader, DoubaoSummarizer
+    EntityCache, URLCache, SerperClient, JinaReader, Summarizer
 )
 
 
@@ -143,7 +143,7 @@ Return your answer in JSON format ONLY:
 
     def __init__(self, api_key: str = None, model: str = None,
                  max_retries: int = 5, base_sleep: float = 2.0):
-        self.api_key = api_key or os.getenv("ARK_API_KEY", "add-your-api-key-here")
+        self.api_key = api_key or os.getenv("OPENAI_API_KEY", "add-your-api-key-here")
         self.model = model or "gpt-4o"
         self.base_url = "add-your-api-base-here"
         self.headers = {
@@ -274,7 +274,7 @@ Return your answer in JSON format ONLY:
 
     def __init__(self, api_key: str = None, model: str = None,
                  max_retries: int = 5, base_sleep: float = 2.0):
-        self.api_key = api_key or os.getenv("ARK_API_KEY", "add-your-api-key-here")
+        self.api_key = api_key or os.getenv("OPENAI_API_KEY", "add-your-api-key-here")
         self.model = model or "gpt-4o"
         self.base_url = "add-your-api-base-here"
         self.headers = {
@@ -391,18 +391,18 @@ class MultiHopSearchAgent:
     """Multi-hop search Agent"""
 
     def __init__(self, serper_api_key: str = None, jina_api_key: str = None,
-                 doubao_api_key: str = None, doubao_model: str = None,
+                 summarizer_api_key: str = None, summarizer_model: str = None,
                  entity_cache: EntityCache = None, url_cache: URLCache = None,
                  candidate_pool: CandidateEntityPool = None,
                  num_pages: int = 5):
         # Search and summary components
         self.searcher = SerperClient(api_key=serper_api_key)
         self.reader = JinaReader(api_key=jina_api_key, url_cache=url_cache)
-        self.summarizer = DoubaoSummarizer(api_key=doubao_api_key, model=doubao_model)
+        self.summarizer = Summarizer(api_key=summarizer_api_key, model=summarizer_model)
 
         # Agent components
-        self.entity_extractor = RelatedEntityExtractor(api_key=doubao_api_key, model=doubao_model)
-        self.entity_selector = EntitySelector(api_key=doubao_api_key, model=doubao_model)
+        self.entity_extractor = RelatedEntityExtractor(api_key=summarizer_api_key, model=summarizer_model)
+        self.entity_selector = EntitySelector(api_key=summarizer_api_key, model=summarizer_model)
 
         # Cache
         self.entity_cache = entity_cache
@@ -709,15 +709,15 @@ def main():
     # API configuration
     SERPER_API_KEY = os.getenv("SERPER_API_KEY", "add-your-serper-api-key-here")
     JINA_API_KEY = os.getenv("JINA_API_KEY", "add-your-jina-api-key-here")
-    DOUBAO_API_KEY = os.getenv("ARK_API_KEY", "add-your-api-key-here")
-    DOUBAO_MODEL = os.getenv("ARK_MODEL", "gpt-4o")
+    SUMMARIZER_API_KEY = os.getenv("OPENAI_API_KEY", "add-your-api-key-here")
+    SUMMARIZER_MODEL = os.getenv("OPENAI_MODEL", "gpt-4o")
 
     # Create Agent
     agent = MultiHopSearchAgent(
         serper_api_key=SERPER_API_KEY,
         jina_api_key=JINA_API_KEY,
-        doubao_api_key=DOUBAO_API_KEY,
-        doubao_model=DOUBAO_MODEL,
+        summarizer_api_key=SUMMARIZER_API_KEY,
+        summarizer_model=SUMMARIZER_MODEL,
         entity_cache=entity_cache,
         url_cache=url_cache,
         candidate_pool=candidate_pool,
@@ -847,3 +847,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
