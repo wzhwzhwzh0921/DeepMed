@@ -11,7 +11,7 @@
 > Put the figure file here (recommended: PNG/SVG for best GitHub rendering):
 - `assets/fig1.png`  *(or `assets/fig1.pdf`, but PDF may not render inline on GitHub)*
 
-![Figure 1](assets/fig1.png)
+![Figure 1](assets/fig1.pdf)
 
 ### Figure 2 — Med-Search Multi-hop Data Synthesis Workflow
 > The multi-hop Med-Search data synthesis workflow for Agentic SFT of **DeepMed**.  
@@ -20,6 +20,6 @@
 
 - `assets/fig2.png` *(or `assets/fig2.pdf`)*
 
-![Figure 2](assets/fig2.png)
+![Figure 2](assets/fig2.pdf)
 
 ---
