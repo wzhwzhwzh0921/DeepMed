@@ -6,7 +6,7 @@
 > **(down)** **DeepMed** shows significant improvements over its base reasoning model on medical benchmarks, and outperforms larger medical reasoning model and general DR models **(down)**.
 
 <p align="center">
-  <img src="assets/fig1.png" alt="Figure 1" width="60%">
+  <img src="assets/fig1.svg" alt="Figure 1" width="60%">
 </p>
 
 ### Figure 2 — Med-Search Multi-hop Data Synthesis Workflow
