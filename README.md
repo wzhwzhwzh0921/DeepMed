@@ -6,7 +6,7 @@
 > **(down)** **DeepMed** shows significant improvements over its base reasoning model on medical benchmarks, and outperforms larger medical reasoning model and general DR models **(down)**.
 
 <p align="center">
-  <img src="assets/fig1.svg" alt="Figure 1" width="60%">
+  <img src="assets/fig1.svg" alt="Figure 1" width="40%">
 </p>
 
 ### Figure 2 — Med-Search Multi-hop Data Synthesis Workflow
@@ -14,21 +14,23 @@
 > The top panel illustrates how we synthesize multi-hop medical chains that emphasize logical relations by leveraging multi-source web evidence.  
 > The bottom panel shows how these chains are transformed into Med-Search QA.
 
-![Figure 2](assets/fig2.png)
+<p align="center">
+  <img src="assets/fig2.svg" alt="Figure 2" width="85%">
+</p>
 
 ### Figure 3 — Rollout Reward Evaluation
 > A full rollout and its reward evaluation are shown. Only segments inside the solid boxes contribute to the loss.  
 > Incorrect format or answer receives zero reward, and even correct rollouts are penalized for excessive rounds.
 
 <p align="center">
-  <img src="assets/fig3.png" alt="Figure 3" width="85%">
+  <img src="assets/fig3.svg" alt="Figure 3" width="85%">
 </p>
 
 ### Figure 4 — Workflow of the `Over-Evidence` Monitor
 > The workflow of `Over-Evidence` monitor.
 
 <p align="center">
-  <img src="assets/fig4.png" alt="Figure 4" width="85%">
+  <img src="assets/fig4.svg" alt="Figure 4" width="40%">
 </p>
 
 
