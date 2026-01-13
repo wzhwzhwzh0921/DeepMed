@@ -95,14 +95,13 @@ class QuestionGenerator:
 
     def __init__(self, api_key: str = None, model: str = None,
                  max_retries: int = 5, base_sleep: float = 2.0):
-        # Use Gemini API
+        # API configuration
         self.api_key = api_key or "add-your-api-key-here"
         self.model = model or "gpt-4o"
         self.base_url = "add-your-api-base-here"
         self.headers = {
             "Content-Type": "application/json",
-            "Api-Key": self.api_key,
-            "X-TT-LOGID": ""
+            "Authorization": f"Bearer {self.api_key}"
         }
         self.max_retries = max_retries
         self.base_sleep = base_sleep
@@ -538,3 +537,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
